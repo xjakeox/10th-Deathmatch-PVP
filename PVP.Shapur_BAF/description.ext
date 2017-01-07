@@ -20,3 +20,4 @@ class header {
 };
 
 disabledAI = 1; //When 1, removes all playable units which do not have a human player. When 0, a logging out player will have AI take control of his character. Default value is 0. (MP)
+enableDebugConsole = 1; // Debug console for logged in admin.
