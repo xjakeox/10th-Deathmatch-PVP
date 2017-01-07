@@ -1,7 +1,5 @@
 //startGame.sqf
-
-//Check to see if teams are ready:
-_rnd = 0;
+//Check to see if teams are ready
 _readyPoints = bluReady + opReady + rusReady + pmcReady;
 _TDMTP = ["tdmspawn1","tdmspawn2","tdmspawn3","tdmspawn4","tdmspawn5","tdmspawn6","tdmspawn6","tdmspawn7"];
 
@@ -39,6 +37,5 @@ else
 	else
 	{
 		"One or more teams are not ready. Please ask team leaders to ready up." remoteExec ["hint"];
-		_readyPoints = 0;
 	};
 };

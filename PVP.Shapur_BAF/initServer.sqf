@@ -17,5 +17,7 @@ publicVariable "rusReady";
 pmcReady = 1;
 publicVariable "pmcReady";
 
+publicVariable ["bluReady", "opReady", "rusReady", "pmcReady"];
+
 //Disable Saving
 enableSaving [false, false];
