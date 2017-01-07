@@ -1,5 +1,5 @@
-_teamLeads = [bluLead, opLead, rusLead];
-_boardArray = [ bluBoard, opBoard, rusBoard];
+_teamLeads = [bluLead, opLead, rusLead, pmcLead];
+_boardArray = [ bluBoard, opBoard, rusBoard, pmcBoard];
 _civs = [civ1,civ2,civ3,civ4,civ5];
 if ((side player) == civilian) then {setplayerrespawntime 999999};
 waitUntil {!isNull player};
@@ -32,6 +32,11 @@ waitUntil {!isNull player};
 			{
 				rusReady = 0;
 				publicVariable "rusReady";
+			};
+			case pmcLead:
+			{
+				pmcReady = 0;
+				publicVariable "pmcReady";
 			};
 		};
 	};

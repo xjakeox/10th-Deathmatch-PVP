@@ -20,4 +20,10 @@ switch(_readyTeam) do
 		[{systemChat "Russian Army is ready to proceed."},"BIS_fnc_call",true,false] spawn BIS_fnc_MP;
 		publicVariable "rusReady";
 	};
+	case pmcBoard:
+	{
+		pmcReady = 1;
+		[{systemChat "PMC is ready to proceed."},"BIS_fnc_call",true,false] spawn BIS_fnc_MP;
+		publicVariable "pmcReady";
+	};
 };

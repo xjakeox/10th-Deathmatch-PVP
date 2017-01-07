@@ -41,4 +41,15 @@ switch(_readyTeam) do
 			publicVariable "rusReady";
 		};
 	};
+	case pmcBoard:
+		if(pmcReady == 0) then
+		{
+			hint "Team is not currently ready";
+		}
+		else
+		{
+			pmcReady = 0;
+			[{systemChat "PMC is no longer ready to proceed."},"BIS_fnc_call",true,false] spawn BIS_fnc_MP;
+			publicVariable "pmcReady";
+		};
 };

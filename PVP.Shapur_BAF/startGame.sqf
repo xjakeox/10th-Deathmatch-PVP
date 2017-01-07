@@ -2,11 +2,12 @@
 
 //Check to see if teams are ready:
 _rnd = 0;
-_readyPoints = bluReady + opReady + rusReady;
+_readyPoints = bluReady + opReady + rusReady + pmcReady;
 _TDMTP = ["tdmspawn1","tdmspawn2","tdmspawn3","tdmspawn4","tdmspawn5","tdmspawn6","tdmspawn6","tdmspawn7"];
 _bluUnits = [bluLead, blu1, blu2, blu3, blu4, blu5];
 _opUnits = [opLead, op1, op2, op3, op4, op5];
 _rusUnits = [rusLead, rus1, rus2, rus3, rus4, rus5];
+_pmcUnits = [pmcLead, pmc1, pmc2, pmc3, pmc4, pmc5];
 
 if (gameStarting == 1) then
 {
@@ -14,7 +15,7 @@ if (gameStarting == 1) then
 }
 else
 {
-	if (_readyPoints == 3) then
+	if (_readyPoints == 4) then
 	{
 		gameStarting = 1;
 		publicVariable "gameStarting";
@@ -37,6 +38,10 @@ else
 		{
 			_x setPos getMarkerPos(_spawnPoint);
 		} forEach _rusUnits;
+		_spawnPoint = _TDMTP call bis_fnc_selectRandom;
+		{
+			_x setPos getMarkerPos(_spawnPoint);
+		} forEach _pmcUnits;
 		
 		gameStarting = 0;
 		publicVariable "gameStarting";
