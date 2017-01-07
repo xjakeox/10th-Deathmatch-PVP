@@ -15,7 +15,7 @@ respawnTemplatesCiv[] = {"Spectator"};
 
 class header {
 	gametype = coop;
-	maxplayers = 20;
+	maxplayers = 29;
 	minplayers = 1;
 };
 
