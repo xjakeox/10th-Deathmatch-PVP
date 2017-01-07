@@ -4,14 +4,10 @@
 _rnd = 0;
 _readyPoints = bluReady + opReady + rusReady + pmcReady;
 _TDMTP = ["tdmspawn1","tdmspawn2","tdmspawn3","tdmspawn4","tdmspawn5","tdmspawn6","tdmspawn6","tdmspawn7"];
-_bluUnits = [bluLead, blu1, blu2, blu3, blu4, blu5];
-_opUnits = [opLead, op1, op2, op3, op4, op5];
-_rusUnits = [rusLead, rus1, rus2, rus3, rus4, rus5];
-_pmcUnits = [pmcLead, pmc1, pmc2, pmc3, pmc4, pmc5];
 
 if (gameStarting == 1) then
 {
-	"Game is starting. Please be paitent and do not spam the command." remoteExec ["hint"];
+	"Game is starting. Please be patient and do not spam the command." remoteExec ["hint"];
 }
 else
 {
@@ -22,27 +18,21 @@ else
 		[{systemChat "All teams indicated they are ready. TDM will begin shortly. Please stand-by for teleport."}, "BIS_fnc_call",true,false] spawn BIS_fnc_MP;
 		
 		sleep 5;
-		
-		_spawnPoint = _TDMTP call bis_fnc_selectRandom;
-		_TDMTP = _TDMTP - [_spawnPoint];
-		{
-			_x setPos getMarkerPos(_spawnPoint);
-		} forEach _bluUnits;
-		_spawnPoint = _TDMTP call bis_fnc_selectRandom;
-		_TDMTP = _TDMTP - [_spawnPoint];
-		{
-			_x setPos getMarkerPos(_spawnPoint);
-		} forEach _opUnits;
-		_spawnPoint = _TDMTP call bis_fnc_selectRandom;
-		_TDMTP = _TDMTP - [_spawnPoint];
-		{
-			_x setPos getMarkerPos(_spawnPoint);
-		} forEach _rusUnits;
-		_spawnPoint = _TDMTP call bis_fnc_selectRandom;
-		{
-			_x setPos getMarkerPos(_spawnPoint);
-		} forEach _pmcUnits;
-		
+      
+		//Loop through all groups, and place the soldiers at a location
+      {
+         //Random a location, and throw it out of the array
+         //Added a check against empty arrays, as attempting to remove from an empty array is stupid
+         _spawnPoint = _TDMTP call bis_fnc_selectRandom;
+         if ((count _TDMTP) > 0) then { _TDMTP = _TDMTP - [_spawnPoint]; };
+         
+         //Place units in a given group
+         {
+            _x setPos getMarkerPos(_spawnPoint);
+         } forEach units _x;
+         
+      } forEach allGroups;
+      
 		gameStarting = 0;
 		publicVariable "gameStarting";
 	}

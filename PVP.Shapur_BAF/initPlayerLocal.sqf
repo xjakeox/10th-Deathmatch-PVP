@@ -1,50 +1,53 @@
-_teamLeads = [bluLead, opLead, rusLead, pmcLead];
+/// Variables ///
 _boardArray = [ bluBoard, opBoard, rusBoard, pmcBoard];
-_civs = [civ1,civ2,civ3,civ4,civ5];
-if ((side player) == civilian) then {setplayerrespawntime 999999};
+
+/// ENTRY POINT ///
 waitUntil {!isNull player};
 
+//No point in looping, as this is an entry point for one person, and one person only(CLIENT).
+//Check for the pattern Lead, as all leads have this in their name.
+if (((format ["%1", player]) find "Lead") != -1) then
 {
-	if (player == _x) then
+   {
+      _x addAction ["<t color='#37FF58'>Ready Team</t>", "readyTeam.sqf"];
+		_x addAction ["<t color='#FF0000'>Unready Team</t>", "unreadyTeam.sqf"];
+		_x addAction ["<t color='#3374FF'>Start Game</t>", "startGame.sqf"];
+   } forEach _boardArray;
+	
+	sleep 1;
+	
+	switch(player) do
 	{
-		_currentLead = player;
+      case bluLead:
 		{
-			_x addAction ["<t color='#37FF58'>Ready Team</t>", "readyTeam.sqf"];
-			_x addAction ["<t color='#FF0000'>Unready Team</t>", "unreadyTeam.sqf"];
-			_x addAction ["<t color='#3374FF'>Start Game</t>", "startGame.sqf"];
-		} forEach _boardArray;
+         bluReady = 0;
+			publicVariable "bluReady";
+      };
 		
-		sleep 1;
+      case opLead:
+      {
+         opReady = 0;
+			publicVariable "opReady";
+      };
 		
-		switch(_currentLead) do
+      case rusLead:
 		{
-			case bluLead:
-			{
-				bluReady = 0;
-				publicVariable "bluReady";
-			};
-			case opLead:
-			{
-				opReady = 0;
-				publicVariable "opReady";
-			};
-			case rusLead:
-			{
-				rusReady = 0;
-				publicVariable "rusReady";
-			};
-			case pmcLead:
-			{
-				pmcReady = 0;
-				publicVariable "pmcReady";
-			};
+         rusReady = 0;
+         publicVariable "rusReady";
+		};
+		
+      case pmcLead:
+		{
+         pmcReady = 0;
+         publicVariable "pmcReady";
 		};
 	};
-} forEach _teamLeads;
+};
 
+//Kill civilians... they are spectators
+if ((side player) == civilian) then 
 {
-	if (player == _x) then
-	{
-		_x setDamage 500;
-	}
-} forEach _civs;
+   setPlayerRespawnTime 999999;
+   player setDamage 500;
+};
+
